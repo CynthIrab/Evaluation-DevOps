@@ -1,0 +1,22 @@
+name: CI Test HTML
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  test-html:
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Install HTML validator
+        run: |
+          sudo apt update
+          sudo apt install tidy -y
+
+      - name: Validate HTML
+        run: tidy -e index.html
